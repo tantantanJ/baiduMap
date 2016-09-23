@@ -20,7 +20,7 @@
 	map.enableScrollWheelZoom(true);
 	var point = new BMap.Point(104.06, 30.67);//设置point初始坐标在天府广场
 	var myGeo = new BMap.Geocoder();// 创建地址解析器实例
-	var adds=["金瑞路西岸官邸1单元","中海国际"];
+	var adds=["春熙路地铁站c口","春熙路地铁站A口"];
 	
 	// 将地址解析结果显示在地图上,并调整地图视野
 	myGeo.getPoint(adds[0], function(pointA){
@@ -35,12 +35,14 @@
 					map.addOverlay(polyline);     //添加折线到地图上
 					map.centerAndZoom(pointB, 16);
 					
+					
 					myGeo.getLocation(pointA, function(rs){
 						var addCompA = rs.addressComponents;
 						myGeo.getLocation(pointB, function(rs){
 							var addCompB = rs.addressComponents;
 							alert(addCompA.province + ", " + addCompA.city + ", " + addCompA.district + ", " + addCompA.street + ", " + addCompA.streetNumber+"<br>"+
 								  addCompB.province + ", " + addCompB.city + ", " + addCompB.district + ", " + addCompB.street + ", " + addCompB.streetNumber);
+						   
 						}); 
 					});   
 					
