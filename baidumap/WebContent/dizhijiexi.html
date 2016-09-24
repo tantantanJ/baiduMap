@@ -15,42 +15,42 @@
 	<div id="allmap"></div>
 </body>
 <script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");
-	map.enableScrollWheelZoom(true);
-	var point = new BMap.Point(104.06, 30.67);//设置point初始坐标在天府广场
-	var myGeo = new BMap.Geocoder();// 创建地址解析器实例
-	var adds=["春熙路地铁站c口","春熙路地铁站A口"];
-	
-	// 将地址解析结果显示在地图上,并调整地图视野
-	myGeo.getPoint(adds[0], function(pointA){
-		if (pointA) {
-			map.addOverlay(new BMap.Marker(pointA));
-			myGeo.getPoint(adds[1], function(pointB){  //
-				if (pointB) {
-					map.addOverlay(new BMap.Marker(pointB));
-					var distance = map.getDistance(pointA,pointB);//获取两点距离
-					alert(distance); 
-					var polyline = new BMap.Polyline([pointA,pointB], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});  //定义折线
-					map.addOverlay(polyline);     //添加折线到地图上
-					map.centerAndZoom(pointB, 16);
-					
-					
-					myGeo.getLocation(pointA, function(rs){
-						var addCompA = rs.addressComponents;
-						myGeo.getLocation(pointB, function(rs){
-							var addCompB = rs.addressComponents;
-							alert(addCompA.province + ", " + addCompA.city + ", " + addCompA.district + ", " + addCompA.street + ", " + addCompA.streetNumber+"<br>"+
-								  addCompB.province + ", " + addCompB.city + ", " + addCompB.district + ", " + addCompB.street + ", " + addCompB.streetNumber);
-						   
-						}); 
-					});   
-					
-				}
-		    },"四川");
-	   }
-	},"四川");
-	
+
+// 百度地图API功能
+var map = new BMap.Map("allmap");
+map.enableScrollWheelZoom(true);
+var point = new BMap.Point(104.06, 30.67);//设置point初始坐标在天府广场
+var myGeo = new BMap.Geocoder();// 创建地址解析器实例
+var adds=["春熙路地铁站c口","春熙路地铁站A口"];
+
+// 将地址解析结果显示在地图上,并调整地图视野
+myGeo.getPoint(adds[0], function(pointA){
+	if (pointA) {
+		map.addOverlay(new BMap.Marker(pointA));
+		myGeo.getPoint(adds[1], function(pointB,pointC){  //
+			if (pointB) {
+				map.addOverlay(new BMap.Marker(pointB));
+				var distance = map.getDistance(pointA,pointB);//获取两点距离
+				alert(distance); 
+				var polyline = new BMap.Polyline([pointA,pointB], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});  //定义折线
+				map.addOverlay(polyline);     //添加折线到地图上
+				map.centerAndZoom(pointB, 16);
+				
+				
+				myGeo.getLocation(pointA, function(rs){
+					var addCompA = rs.addressComponents;
+					myGeo.getLocation(pointB, function(rs){
+						var addCompB = rs.addressComponents;
+						alert(addCompA.province + ", " + addCompA.city + ", " + addCompA.district + ", " + addCompA.street + ", " + addCompA.streetNumber+"<br>"+
+							  addCompB.province + ", " + addCompB.city + ", " + addCompB.district + ", " + addCompB.street + ", " + addCompB.streetNumber);
+					   
+					}); 
+				});   
+				
+			}
+	    },"四川");
+   }
+},"四川");
 
 </script>
 </html>
